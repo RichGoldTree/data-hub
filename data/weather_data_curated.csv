@@ -1,0 +1,5 @@
+date,temperature,temp_category,humidity
+2024-01-01,3,Mild,45
+2024-01-02,5,Warm,50
+2024-01-03,2,Cold,55
+2024-01-04,4,Mild,48
