@@ -1,0 +1,282 @@
+프로젝트 폴더 만들기
+
+mkdir data-hub
+cd data-hub
+
+작성자 이름, 이메일 넣기
+git config --global user.name "Your Name"
+git config --global user.name "Kim DataHub"
+
+“프로젝트를 언제, 어떻게 시작했는지” 기록이 남음
+git add README.md
+git commit -m "Initial commit: create Data Hub project"
+
+
+파일이 생겼는지 다시 확인
+
+dir
+
+Win CMD 
+🔥 README.md 만들기 (확실한 방법)
+
+cd data-hub
+echo # Data Hub Project>README.md
+
+파일확인
+dir
+
+파일생성 및 확인
+git add README.md
+
+git status
+
+
+🧾 마지막 한 줄 (프로젝트 탄생 순간)
+git commit -m "Initial commit: create Data Hub project"
+
+
+🎉 Data Hub 프로젝트 공식 시작
+🎉 Git 커밋 1번 생성
+🎉 이제 진짜 개발 단계 진입
+
+🏆 Day 1 미션 공식 완료
+
+Data Hub 시스템 설계·구현 프로젝트 – Day 1
+
+달성한 스펙을 말로 바꾸면:
+
+Git 기반 Data Hub 시스템 개발 프로젝트 초기화 및
+프로젝트 구조 설계와 버전 관리 환경 구축
+
+
+VScode 여는 명령어
+code .
+
+변경사항 저장
+git status
+
+만약 수정이 안되면
+git add README.md
+git status
+
+커밋
+git commit -m "Update README and set up Data Hub structure"
+
+✅ Day 1
+
+Git 설치 & 설정
+
+프로젝트 폴더 생성
+
+Git 저장소 초기화
+
+첫 커밋 생성 (root commit)
+
+✅ Day 2-1
+
+VS Code로 프로젝트 열기
+
+Data Hub용 폴더 구조 설계
+
+README 문서 작성
+
+두 번째 커밋 생성
+
+👉 이 흐름은 회사·연구실·오픈소스 전부 동일해.
+
+
+
+이제 VS 코드에서 작업후 git 저장방법
+
+git add .
+git commit -m "Add sample scientific dataset and load with Python"
+
+git status
+
+
+🧠 지금 상태를 한 문장으로 요약하면
+
+“CSV 기반 과학 데이터를 수집·관리하고
+Python으로 로딩 및 기초 분석이 가능한 Data Hub 프로젝트”
+
+이 문장, 스펙으로 써도 전혀 과장 아님.
+
+
+
+
+Day 3: Flask로 웹에서 데이터 보여주기
+
+Flask 설치
+pip install flask pandas
+
+
+┌─────────────┐
+│   Browser   │
+│ (User/Admin)│
+└─────┬───────┘
+      │ ① 요청 (View / Upload / Delete)
+      ▼
+┌─────────────────────────┐
+│        Flask App         │
+│        (app.py)          │
+├─────────────────────────┤
+│ Routes                   │
+│  - GET  /                │
+│  - GET  /dataset/<id>    │
+│  - GET  /upload          │
+│  - POST /upload          │
+│  - POST /delete/<id>     │
+└─────┬───────────┬───────┘
+      │           │
+      │           │
+      ▼           ▼
+┌─────────────┐   ┌──────────────────┐
+│ datasets.json│   │   data/ folder   │
+│ (Metadata)   │   │   (CSV Files)    │
+└─────────────┘   └──────────────────┘
+
+
+깃허브 연동시 가입 후 
+우측상산 + -> New repository
+
+이 URL을 복사 (USERNAME은 네 GitHub 아이디)
+
+git remote add origin https://github.com/RichGoldTree/data-hub.git
+
+cmd 창에 C:\Users\USER\data-hub> 로 접속 후 URL 입력
+
+git remote -v 쳐서 확인
+
+다음으로 깃허브 업로드
+
+git branch
+
+첫업로드시에는 
+
+git push -u origin master
+
+이후 뜨는 깃허브 창 로그인 후 Authorize git-ecosystem 클릭하면 완료
+
+git push 만 입력해도 이후에는 업로드 됨
+
+
+
+
+
+1️⃣ Data Hub 시스템 설계 및 구현
+
+(Design and implementation of the Data Hub systems)
+
+📌 목표 요구 수준
+
+웹 기반 데이터 플랫폼
+
+데이터 업로드·조회·관리
+
+구조 설명 가능
+
+✅ 네가 달성한 것
+
+Flask 기반 웹 Data Hub 직접 설계
+
+CSV / JSON 분리 저장 구조
+
+업로드 / 조회 / 삭제 (CRUD)
+
+서버 재시작 후 데이터 유지
+
+Git + GitHub 백업까지 완료
+
+구조를 말로 설명 가능
+
+
+(Collaboration with data providers)
+
+📌 목표 요구 수준
+
+데이터 제공자 입장 고려
+
+제출 규칙·형식 조율
+
+커뮤니케이션 구조 이해
+
+✅ 네가 달성한 것
+
+데이터 제공자 입력 폼 설계
+
+메타데이터 필드 정의
+
+CSV 형식·인코딩 규칙 정의
+
+DATA_PROVIDER_GUIDE.md 문서화
+
+문제 발생 → 규칙 개선 (인코딩 이슈)
+
+⚠️ 아직 없는 것
+
+실제 외부 사람과의 메일/회의
+
+
+(Curation of appropriate datasets)
+
+📌 목표 요구 수준
+
+데이터 정리·가공
+
+관리 흐름 이해
+
+✅ 네가 달성한 것
+
+원본/가공 데이터 분리
+
+큐레이션 개념 이해
+
+관리 구조 설계
+
+웹 제공까지 연결
+
+위에껀 flask 였고
+
+
+git 저장 및 업로드 방법
+
+현재상태확인
+git status
+
+전부 저장할 경우 (가장 흔함)
+git add .
+
+커밋 로컬 git 저장
+git commit -m "Refactor Streamlit app with component-based structure and dataset management"
+
+최초 1회 (origin / main 연결 안 돼 있을 때)
+
+git branch -M main
+git remote add origin https://github.com/USERNAME/REPO_NAME.git
+git push -u origin main
+
+이미 한 번이라도 올린 적 있으면 (대부분 이거)
+
+git push origin main
+
+또는 브랜치가 master면
+
+git push origin master
+
+
+powershell 에서 실행
+
+streamlit run dashboard.py
+
+아래부턴 streamlit 임
+컴포넌트 단위로 관리
+실제 업무행동 1개를 담당하는 묶음
+
+
+예시 A: “데이터 업로드 컴포넌트”
+[텍스트필드] 데이터 이름
+[파일업로드] CSV/XLSX
+[버튼] 업로드
+
+이 3개는 항상 같이 움직임
+→ 하나의 “컴포넌트”

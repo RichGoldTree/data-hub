@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% set title = "Data Hub · Home" %}
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <div>
+    <h1 class="h3 mb-1">데이터셋</h1>
+    <div class="text-muted small">업로드된 CSV를 탐색하고 다운로드할 수 있습니다.</div>
+  </div>
+  <a class="btn btn-primary" href="{{ url_for('upload') }}">➕ 파일 추가</a>
+</div>
+
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <form class="row g-2 align-items-end" method="get">
+      <div class="col-12 col-md-6">
+        <label class="form-label small text-muted">검색</label>
+        <input class="form-control" name="q" value="{{ q }}" placeholder="이름/제공자/라이선스">
+      </div>
+
+      <div class="col-6 col-md-3">
+        <label class="form-label small text-muted">정렬</label>
+        <select class="form-select" name="sort">
+          <option value="new"  {{ "selected" if sort=="new" else "" }}>최신</option>
+          <option value="name" {{ "selected" if sort=="name" else "" }}>이름</option>
+          <option value="rows" {{ "selected" if sort=="rows" else "" }}>행 수</option>
+        </select>
+      </div>
+
+      <div class="col-6 col-md-2">
+        <label class="form-label small text-muted">방향</label>
+        <select class="form-select" name="dir">
+          <option value="desc" {{ "selected" if direction=="desc" else "" }}>내림차순</option>
+          <option value="asc"  {{ "selected" if direction=="asc" else "" }}>오름차순</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-1 d-grid">
+        <button class="btn btn-outline-secondary" type="submit">적용</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if datasets|length == 0 %}
+  <div class="text-center p-5 bg-white border rounded-3">
+    <div class="display-6 mb-2">📭</div>
+    <div class="fw-semibold">데이터셋이 없습니다.</div>
+    <div class="text-muted">오른쪽 상단 “파일 추가”로 CSV를 업로드하세요.</div>
+  </div>
+{% else %}
+  <div class="row g-3">
+    {% for ds in datasets %}
+      <div class="col-12 col-lg-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fw-semibold fs-5 mb-1">{{ ds.name }}</div>
+                <div class="text-muted small">{{ ds.description or "" }}</div>
+              </div>
+              <span class="badge text-bg-secondary">{{ ds.rows }} rows · {{ ds.columns }} cols</span>
+            </div>
+
+            <hr>
+
+            <div class="small text-muted">
+              <div><span class="fw-semibold">Provider:</span> {{ ds.provider }}</div>
+              <div><span class="fw-semibold">License:</span> {{ ds.license }}</div>
+              <div class="mt-1"><span class="fw-semibold">Created:</span> {{ ds.created_at or "-" }}</div>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white border-0 pt-0">
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-primary" href="{{ url_for('dataset_detail', dataset_id=ds.id) }}">보기</a>
+              <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('download', dataset_id=ds.id) }}">다운로드</a>
+
+              <button class="btn btn-sm btn-outline-danger ms-auto"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal"
+                      data-dsid="{{ ds.id }}"
+                      data-dsname="{{ ds.name }}">
+                삭제
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">삭제 확인</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-muted">다음 데이터셋을 삭제할까요?</div>
+        <div class="fw-semibold mt-2" id="modalDsName">-</div>
+        <div class="small text-danger mt-2">삭제하면 CSV 파일도 함께 삭제되며 복구할 수 없습니다.</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+        <form id="deleteForm" method="post">
+          <button class="btn btn-danger" type="submit">삭제</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

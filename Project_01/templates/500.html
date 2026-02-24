@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% set title = "500 Server Error" %}
+{% block content %}
+<div class="text-center p-5 bg-white border rounded-3 shadow-sm">
+  <div class="display-5">500</div>
+  <div class="fw-semibold mt-2">서버 오류가 발생했습니다.</div>
+  <div class="text-muted mt-2">잠시 후 다시 시도해주세요.</div>
+  <a class="btn btn-primary mt-3" href="{{ url_for('home') }}">홈으로</a>
+</div>
+{% endblock %}

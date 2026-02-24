@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% set title = "Data Hub · Upload" %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 mb-1">파일 추가</h1>
+        <div class="text-muted small mb-3">CSV 파일을 업로드하면 Data Hub에 등록됩니다. (최대 {{ max_mb }}MB)</div>
+
+        <form method="post" enctype="multipart/form-data" class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Dataset Name</label>
+            <input class="form-control" name="name" required placeholder="예: Sales 2025 Q4">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label">Provider</label>
+            <input class="form-control" name="provider" required placeholder="예: Internal / Kaggle / etc">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label">License</label>
+            <input class="form-control" name="license" required placeholder="예: CC BY 4.0 / Proprietary">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description (optional)</label>
+            <textarea class="form-control" name="description" rows="2" placeholder="간단 설명"></textarea>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">CSV File</label>
+            <input class="form-control" type="file" name="file" accept=".csv" required>
+            <div class="form-text">UTF-8 또는 CP949 인코딩을 지원합니다.</div>
+          </div>
+
+          <div class="col-12 d-grid">
+            <button class="btn btn-primary" type="submit">업로드</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-muted small mt-3">
+      팁: 컬럼이 많은 파일은 미리보기/통계 렌더링이 느릴 수 있어요. (미리보기는 최대 500행까지 제한)
+    </div>
+  </div>
+</div>
+
+{% endblock %}
