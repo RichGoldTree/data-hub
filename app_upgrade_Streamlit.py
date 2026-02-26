@@ -99,7 +99,7 @@ def render_dataset_manager():
                 f.write(uploaded.getbuffer())
             datasets[ts] = {"name": name, "file": fname}
             save_datasets(datasets)
-            st.experimental_rerun()
+            st.rerun()
 
     # ❌ 삭제
     st.sidebar.subheader("❌ 데이터 삭제")
@@ -117,7 +117,7 @@ def render_dataset_manager():
                     pass
                 datasets.pop(did)
                 save_datasets(datasets)
-                st.experimental_rerun()
+                st.rerun()
 
     return datasets
 
